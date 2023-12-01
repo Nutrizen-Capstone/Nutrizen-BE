@@ -10,3 +10,12 @@ Content-Type: application/json
     "password": "123454321",
     "confPassword": "123454321"
 }
+
+###
+POST http://localhost:5000/login
+Content-Type: application/json
+
+{
+    "email": "adit@gmail.com",
+    "password": "123454321"
+}
