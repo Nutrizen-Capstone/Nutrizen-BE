@@ -1,0 +1,12 @@
+GET http://localhost:5000/users
+
+###
+POST http://localhost:5000/users
+Content-Type: application/json
+
+{
+    "name": "Adit Akbars",
+    "email": "adit@gmail.com",
+    "password": "123454321",
+    "confPassword": "123454321"
+}
