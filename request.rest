@@ -1,5 +1,5 @@
 GET http://localhost:5000/users/c881f805-3199-44c0-b8d2-40ff6e73edde
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjODgxZjgwNS0zMTk5LTQ0YzAtYjhkMi00MGZmNmU3M2VkZGUiLCJuYW1lIjoiQWRpdCBBa2JhcnMyIiwiZW1haWwiOiJhZGl0MkBnbWFpbC5jb20iLCJpYXQiOjE3MDIxOTc5MzUsImV4cCI6MTcwMjE5ODIzNX0.EuH4zCIlRB_RwIgprUkZyxje4Xhpz_Guc8-VvFN69Bo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxIiwibmFtZSI6IkFkaXQgQWtiYXJzIiwiZW1haWwiOiJhZGl0QGdtYWlsLmNvbSIsImlhdCI6MTcwMjE5OTczMCwiZXhwIjoxNzAyMjAwMDMwfQ.C-5P3wV6wsbKqsXs6VYZsZ8j2olJQj0BtKIcqvwihFc
 
 
 ###
@@ -18,7 +18,7 @@ POST http://localhost:5000/login
 Content-Type: application/json
 
 {
-    "email": "adit2@gmail.com",
+    "email": "adit@gmail.com",
     "password": "123454321"
 }
 
@@ -28,3 +28,18 @@ GET http://localhost:5000/token
 ###
 DELETE http://localhost:5000/logout
 
+###
+PUT http://localhost:5000/profile/c881f805-3199-44c0-b8d2-40ff6e73edde
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxIiwibmFtZSI6IkFkaXQgQWtiYXJzIiwiZW1haWwiOiJhZGl0QGdtYWlsLmNvbSIsImlhdCI6MTcwMjE5OTczMCwiZXhwIjoxNzAyMjAwMDMwfQ.C-5P3wV6wsbKqsXs6VYZsZ8j2olJQj0BtKIcqvwihFc
+Content-Type: application/json
+
+{
+    "photoUrl": "https://source.unsplash.com/100x100?twit",
+    "birthDate": "1990-01-01",
+    "age": 32,
+    "gender": 1,      
+    "weight": 70.5,
+    "height": 175.0,
+    "activity": 2,    
+    "goal": 1       
+}

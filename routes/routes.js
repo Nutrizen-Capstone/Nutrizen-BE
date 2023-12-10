@@ -1,5 +1,5 @@
 import express from "express";
-import  { getUsers, Login, Logout, Register, getUser } from "../controllers/UserController.js";
+import  { getUsers, Login, Logout, Register, getUser, completeProfile } from "../controllers/UserController.js";
 import { verifyToken } from "../middleware/VerifyToken.js";
 import { refreshToken } from "../controllers/RefreshToken.js";
 
@@ -11,5 +11,6 @@ router.get('/token', refreshToken);
 router.delete('/logout', Logout);
 router.get('/users', verifyToken, getUsers);
 router.get('/users/:id', verifyToken, getUser);
+router.put('/profile/:id', verifyToken, completeProfile);
 
 export default router

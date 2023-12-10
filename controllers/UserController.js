@@ -123,3 +123,46 @@ export const getUser = async (req, res) => {
         res.status(500).json({ msg: "Terjadi kesalahan server" });
     }
 };
+
+export const completeProfile = async (req, res) => {
+    try {
+        const userId = req.params.id;
+
+        const user = await Users.findOne({
+            where: {
+                id: userId,
+                isDataCompleted: false
+            }
+        });
+
+        if (user) {
+            const { photoUrl, birthDate, age, gender, weight, height, activity, goal } = req.body;
+
+            await Users.update(
+                {
+                    photoUrl,
+                    birthDate,
+                    age,
+                    gender,
+                    weight,
+                    height,
+                    activity,
+                    goal,
+                    isDataCompleted: true
+                },
+                {
+                    where: {
+                        id: userId
+                    }
+                }
+            );
+
+            res.json({ msg: "Profil berhasil dilengkapi" });
+        } else {
+            res.status(403).json({ msg: "Profil sudah lengkap atau pengguna tidak ditemukan" });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ msg: "Terjadi kesalahan server" });
+    }
+};
