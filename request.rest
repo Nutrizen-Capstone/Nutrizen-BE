@@ -1,5 +1,5 @@
-GET http://localhost:5000/users
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsIm5hbWUiOiJBZGl0IEFrYmFycyIsImVtYWlsIjoiYWRpdEBnbWFpbC5jb20iLCJpYXQiOjE3MDE0MzY3MTcsImV4cCI6MTcwMTQzNjczMn0.nOAjUiVM-Z5h5XynUoJHfGPmLJ_GSfacVguPAdVudUE
+GET http://localhost:5000/users/c881f805-3199-44c0-b8d2-40ff6e73edde
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjODgxZjgwNS0zMTk5LTQ0YzAtYjhkMi00MGZmNmU3M2VkZGUiLCJuYW1lIjoiQWRpdCBBa2JhcnMyIiwiZW1haWwiOiJhZGl0MkBnbWFpbC5jb20iLCJpYXQiOjE3MDIxOTc5MzUsImV4cCI6MTcwMjE5ODIzNX0.EuH4zCIlRB_RwIgprUkZyxje4Xhpz_Guc8-VvFN69Bo
 
 
 ###
@@ -7,8 +7,8 @@ POST http://localhost:5000/register
 Content-Type: application/json
 
 {
-    "name": "Adit Akbars",
-    "email": "adit@gmail.com",
+    "name": "Adit Akbars2",
+    "email": "adit2@gmail.com",
     "password": "123454321",
     "confPassword": "123454321"
 }
@@ -18,7 +18,7 @@ POST http://localhost:5000/login
 Content-Type: application/json
 
 {
-    "email": "adit@gmail.com",
+    "email": "adit2@gmail.com",
     "password": "123454321"
 }
 

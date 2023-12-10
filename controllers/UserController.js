@@ -2,17 +2,6 @@ import Users from "../models/UserModel.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-export const getUsers = async(req, res) => {
-    try {
-        const users = await Users.findAll({
-            attributes:['id','name','email']
-        });
-        res.json(users);
-    } catch (error) {
-        console.log(error);
-    }
-}
-
 export const Register = async(req, res) => {
     const { name, email, password, confPassword } = req.body;
     if(password !== confPassword){
@@ -57,7 +46,7 @@ export const Login = async(req, res) => {
         const email = user[0].email;
 
         const accessToken = jwt.sign({userId, name, email}, process.env.ACCESS_TOKEN_SECRET,{
-            expiresIn: '20s'
+            expiresIn: '5m'
         });
 
         const refreshToken = jwt.sign({userId, name, email}, process.env.REFRESH_TOKEN_SECRET,{
@@ -101,3 +90,36 @@ export const Logout = async(req, res) => {
         res.clearCookie('refreshToken');
         return res.sendStatus(200);
 }
+
+export const getUsers = async(req, res) => {
+    try {
+        const users = await Users.findAll({
+            attributes:['id','name','email']
+        });
+        res.json(users);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export const getUser = async (req, res) => {
+    try {
+        // Mengambil ID pengguna dari parameter permintaan
+        const userId = req.params.id;
+
+        // Mencari pengguna berdasarkan ID
+        const user = await Users.findByPk(userId);
+
+        // Jika pengguna ditemukan, kirimkan data pengguna sebagai respons JSON
+        if (user) {
+            res.json(user);
+        } else {
+            // Jika pengguna tidak ditemukan, kirim respons dengan status 404
+            res.status(404).json({ msg: "Pengguna tidak ditemukan" });
+        }
+    } catch (error) {
+        // Tangani kesalahan dan kirim respons dengan status 500
+        console.error(error);
+        res.status(500).json({ msg: "Terjadi kesalahan server" });
+    }
+};
