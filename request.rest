@@ -1,5 +1,12 @@
+GET http://localhost:5000
+
+###
+GET http://localhost:5000/users/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxIiwibmFtZSI6IkFkaXQgQWtiYXJzIiwiZW1haWwiOiJhZGl0QGdtYWlsLmNvbSIsImlhdCI6MTcwMjU1MzI4OCwiZXhwIjoxNzAyNTUzNTg4fQ.Br0zR9dqqgWlvnsXIHzw0ur5FSE5gOF4HCj9JJWvap0
+
+###
 GET http://localhost:5000/users/c881f805-3199-44c0-b8d2-40ff6e73edde
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxIiwibmFtZSI6IkFkaXQgQWtiYXJzIiwiZW1haWwiOiJhZGl0QGdtYWlsLmNvbSIsImlhdCI6MTcwMjE5OTczMCwiZXhwIjoxNzAyMjAwMDMwfQ.C-5P3wV6wsbKqsXs6VYZsZ8j2olJQj0BtKIcqvwihFc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxIiwibmFtZSI6IkFkaXQgQWtiYXJzIiwiZW1haWwiOiJhZGl0QGdtYWlsLmNvbSIsImlhdCI6MTcwMjU1MzI4OCwiZXhwIjoxNzAyNTUzNTg4fQ.Br0zR9dqqgWlvnsXIHzw0ur5FSE5gOF4HCj9JJWvap0
 
 
 ###
@@ -42,4 +49,14 @@ Content-Type: application/json
     "height": 175.0,
     "activity": 2,    
     "goal": 1       
+}
+
+###
+PUT http://localhost:5000/profile/c881f805-3199-44c0-b8d2-40ff6e73edde/edit
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxIiwibmFtZSI6IkFkaXQgQWtiYXJzIiwiZW1haWwiOiJhZGl0QGdtYWlsLmNvbSIsImlhdCI6MTcwMjU1MzI4OCwiZXhwIjoxNzAyNTUzNTg4fQ.Br0zR9dqqgWlvnsXIHzw0ur5FSE5gOF4HCj9JJWvap0
+Content-Type: application/json
+
+{
+    "photoUrl": "https://source.unsplash.com/100x100?zombie",
+    "birthDate": "2000-01-01"     
 }

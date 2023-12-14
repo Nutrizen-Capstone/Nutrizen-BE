@@ -2,6 +2,10 @@ import Users from "../models/UserModel.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
+export const Welcome = (req, res) => {
+    res.send("Welcome to NutriZen API!");
+};
+
 export const Register = async(req, res) => {
     const { name, email, password, confPassword } = req.body;
     if(password !== confPassword){
@@ -160,6 +164,45 @@ export const completeProfile = async (req, res) => {
             res.json({ msg: "Profil berhasil dilengkapi" });
         } else {
             res.status(403).json({ msg: "Profil sudah lengkap atau pengguna tidak ditemukan" });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ msg: "Terjadi kesalahan server" });
+    }
+};
+
+export const editProfile = async (req, res) => {
+    try {
+        const userId = req.params.id;
+
+        const user = await Users.findByPk(userId);
+
+        if (user) {
+            // Mengambil data profil yang diterima dari permintaan
+            const { photoUrl, birthDate, age, gender, weight, height, activity, goal } = req.body;
+
+            // Melakukan pembaruan pada data profil pengguna
+            await Users.update(
+                {
+                    photoUrl,
+                    birthDate,
+                    age,
+                    gender,
+                    weight,
+                    height,
+                    activity,
+                    goal
+                },
+                {
+                    where: {
+                        id: userId
+                    }
+                }
+            );
+
+            res.json({ msg: "Profil berhasil diperbarui" });
+        } else {
+            res.status(404).json({ msg: "Pengguna tidak ditemukan" });
         }
     } catch (error) {
         console.error(error);
