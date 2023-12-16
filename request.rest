@@ -2,8 +2,7 @@ GET http://localhost:5000
 
 ###
 GET http://localhost:5000/users/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxIiwibmFtZSI6IkFkaXQgQWtiYXJzIiwiZW1haWwiOiJhZGl0QGdtYWlsLmNvbSIsImlhdCI6MTcwMjU1MzI4OCwiZXhwIjoxNzAyNTUzNTg4fQ.Br0zR9dqqgWlvnsXIHzw0ur5FSE5gOF4HCj9JJWvap0
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxIiwibmFtZSI6IkFkaXQgQWtiYXJzIiwiZW1haWwiOiJhZGl0QGdtYWlsLmNvbSIsImlhdCI6MTcwMjc0NDA2NywiZXhwIjoxNzAyNzQ0MjQ3fQ.NYkJY2myL7scMOVRynXn2a8FFgJ2XRs-Xk-15ONreTc
 ###
 GET http://localhost:5000/users/c881f805-3199-44c0-b8d2-40ff6e73edde
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIxIiwibmFtZSI6IkFkaXQgQWtiYXJzIiwiZW1haWwiOiJhZGl0QGdtYWlsLmNvbSIsImlhdCI6MTcwMjU1MzI4OCwiZXhwIjoxNzAyNTUzNTg4fQ.Br0zR9dqqgWlvnsXIHzw0ur5FSE5gOF4HCj9JJWvap0
@@ -14,8 +13,8 @@ POST http://localhost:5000/register
 Content-Type: application/json
 
 {
-    "name": "Adit Akbars2",
-    "email": "adit2@gmail.com",
+    "name": "Adit Akbars4",
+    "email": "adit4@gmail.com",
     "password": "123454321",
     "confPassword": "123454321"
 }
@@ -25,7 +24,7 @@ POST http://localhost:5000/login
 Content-Type: application/json
 
 {
-    "email": "adit@gmail.com",
+    "email": "adit5@gmail.com",
     "password": "123454321"
 }
 
