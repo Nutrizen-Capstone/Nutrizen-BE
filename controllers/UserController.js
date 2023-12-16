@@ -31,50 +31,70 @@ export const Register = async(req, res) => {
     }
 }
 
-export const Login = async(req, res) => {
+export const Login = async (req, res) => {
     try {
-        const user = await Users.findAll({
-            where:{
-                email: req.body.email
-            }
-        })
-        const match = await bcrypt.compare(req.body.password, user[0].password);
-        if(!match) {
+        const { email, password } = req.body;
+
+        // Pemeriksaan apakah email dan password diberikan
+        if (!email || !password) {
             return res.status(400).json({
-                msg: "Password salah!"
+                msg: "Email dan password dibutuhkan",
             });
         }
 
-        const userId = user[0].id;
-        const name = user[0].name;
-        const email = user[0].email;
-
-        const accessToken = jwt.sign({userId, name, email}, process.env.ACCESS_TOKEN_SECRET,{
-            expiresIn: '3M'
+        const user = await Users.findOne({
+            where: {
+                email: email,
+            },
+            attributes: ['id', 'name', 'email', 'password'],
         });
 
-        const refreshToken = jwt.sign({userId, name, email}, process.env.REFRESH_TOKEN_SECRET,{
-            expiresIn: '3M'
+        // Pemeriksaan apakah pengguna ditemukan
+        if (!user) {
+            return res.status(400).json({
+                msg: "Email tidak ditemukan",
+            });
+        }
+
+        const match = await bcrypt.compare(password, user.password);
+
+        // Pemeriksaan apakah password cocok
+        if (!match) {
+            return res.status(400).json({
+                msg: "Password salah!",
+            });
+        }
+
+        const userId = user.id;
+        const name = user.name;
+
+        const accessToken = jwt.sign({ name, email }, process.env.ACCESS_TOKEN_SECRET, {
+            expiresIn: '3M',
         });
 
-        await Users.update({refresh_token: refreshToken},{
-            where:{
+        const refreshToken = jwt.sign({ name, email }, process.env.REFRESH_TOKEN_SECRET, {
+            expiresIn: '3M',
+        });
+
+        // Update refreshToken pada database
+        await Users.update({ refresh_token: refreshToken }, {
+            where: {
                 id: userId
             }
         });
 
         res.cookie('refreshToken', refreshToken, {
             httpOnly: true,
-            maxAge: 24 * 60 * 60 * 1000
+            maxAge: 24 * 60 * 60 * 1000,
         });
+
         res.json({ accessToken });
 
     } catch (error) {
-        res.status(400).json({
-            msg: "Email tidak ditemukan"
-        });
+        console.error(error);
+        res.status(500).json({ msg: "Terjadi kesalahan internal" });
     }
-}
+};
 
 export const Logout = async(req, res) => {
     const refreshToken = req.cookies.refreshToken;
