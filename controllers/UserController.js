@@ -10,7 +10,7 @@ export const Register = async(req, res) => {
     const { name, email, password, confPassword } = req.body;
     if(password !== confPassword){
         return res.status(400).json({
-            msg: "Password tidak sesuai"
+            message: "Password tidak sesuai"
         })
     }
 
@@ -24,7 +24,7 @@ export const Register = async(req, res) => {
             password: hashPassword
         });
         res.json({
-            msg: "Register berhasil"
+            message: "Register berhasil"
         })
     } catch (error) {
         console.log(error);
@@ -38,7 +38,7 @@ export const Login = async (req, res) => {
         // Pemeriksaan apakah email dan password diberikan
         if (!email || !password) {
             return res.status(400).json({
-                msg: "Email dan password dibutuhkan",
+                message: "Email dan password dibutuhkan",
             });
         }
 
@@ -52,7 +52,7 @@ export const Login = async (req, res) => {
         // Pemeriksaan apakah pengguna ditemukan
         if (!user) {
             return res.status(400).json({
-                msg: "Email tidak ditemukan",
+                message: "Email tidak ditemukan",
             });
         }
 
@@ -61,7 +61,7 @@ export const Login = async (req, res) => {
         // Pemeriksaan apakah password cocok
         if (!match) {
             return res.status(400).json({
-                msg: "Password salah!",
+                message: "Password salah!",
             });
         }
 
@@ -92,7 +92,7 @@ export const Login = async (req, res) => {
 
     } catch (error) {
         console.error(error);
-        res.status(500).json({ msg: "Terjadi kesalahan internal" });
+        res.status(500).json({ message: "Terjadi kesalahan internal" });
     }
 };
 
@@ -139,12 +139,12 @@ export const getUser = async (req, res) => {
             res.json(user);
         } else {
             // Jika pengguna tidak ditemukan, kirim respons dengan status 404
-            res.status(404).json({ msg: "Pengguna tidak ditemukan" });
+            res.status(404).json({ message: "Pengguna tidak ditemukan" });
         }
     } catch (error) {
         // Tangani kesalahan dan kirim respons dengan status 500
         console.error(error);
-        res.status(500).json({ msg: "Terjadi kesalahan server" });
+        res.status(500).json({ message: "Terjadi kesalahan server" });
     }
 };
 
@@ -181,13 +181,13 @@ export const completeProfile = async (req, res) => {
                 }
             );
 
-            res.json({ msg: "Profil berhasil dilengkapi" });
+            res.json({ message: "Profil berhasil dilengkapi" });
         } else {
-            res.status(403).json({ msg: "Profil sudah lengkap atau pengguna tidak ditemukan" });
+            res.status(403).json({ message: "Profil sudah lengkap atau pengguna tidak ditemukan" });
         }
     } catch (error) {
         console.error(error);
-        res.status(500).json({ msg: "Terjadi kesalahan server" });
+        res.status(500).json({ message: "Terjadi kesalahan server" });
     }
 };
 
@@ -220,12 +220,12 @@ export const editProfile = async (req, res) => {
                 }
             );
 
-            res.json({ msg: "Profil berhasil diperbarui" });
+            res.json({ message: "Profil berhasil diperbarui" });
         } else {
-            res.status(404).json({ msg: "Pengguna tidak ditemukan" });
+            res.status(404).json({ message: "Pengguna tidak ditemukan" });
         }
     } catch (error) {
         console.error(error);
-        res.status(500).json({ msg: "Terjadi kesalahan server" });
+        res.status(500).json({ message: "Terjadi kesalahan server" });
     }
 };
