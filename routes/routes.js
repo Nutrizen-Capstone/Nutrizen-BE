@@ -19,6 +19,6 @@ router.put('/profile/:id/edit', verifyToken, editProfile);
 
 //scan
 router.post('/scan', verifyToken, addScanHistory);
-router.get('/scan/:userId', verifyToken, getScanHistoryByUserId);
+router.get('/scan/:id', verifyToken, getScanHistoryByUserId);
 
 export default router
