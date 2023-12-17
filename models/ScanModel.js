@@ -1,5 +1,4 @@
 import { DataTypes, Sequelize } from 'sequelize';
-
 import { v4 as uuidv4 } from 'uuid';
 import db from '../config/db.js';
 
@@ -40,8 +39,8 @@ const ScanHistory = db.define('scan_history', {
         defaultValue: DataTypes.NOW,
     },
 }, {
-    timestamps: false,  // Nonaktifkan kolom createdAt dan updatedAt
-    underscored: false,   // Gunakan _ sebagai pemisah antara kata dalam nama kolom
+    timestamps: false,
+    underscored: false,
 });
 
 export default ScanHistory;
