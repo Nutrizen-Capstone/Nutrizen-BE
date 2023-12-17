@@ -6,30 +6,54 @@ export const Welcome = (req, res) => {
     res.send("Welcome to NutriZen API!");
 };
 
-export const Register = async(req, res) => {
+export const Register = async (req, res) => {
     const { name, email, password, confPassword } = req.body;
-    if(password !== confPassword){
+
+    // Memeriksa apakah password sesuai
+    if (password !== confPassword) {
         return res.status(400).json({
-            message: "Password tidak sesuai"
-        })
+            error: true,
+            message: "Password tidak sesuai",
+        });
     }
 
-    const salt = await bcrypt.genSalt();
-    const hashPassword = await bcrypt.hash(password, salt);
-    
     try {
+      // Memeriksa apakah email sudah dipakai sebelumnya
+        const existingUser = await Users.findOne({
+            where: {
+                email: email,
+            },
+        });
+    
+        if (existingUser) {
+            return res.status(400).json({
+                error: true,
+                message: "Email has already been taken",
+            });
+        }
+
+      // Jika email belum dipakai, lanjutkan dengan proses registrasi
+        const salt = await bcrypt.genSalt();
+        const hashPassword = await bcrypt.hash(password, salt);
+    
         await Users.create({
             name: name,
             email: email,
-            password: hashPassword
+            password: hashPassword,
         });
+
         res.json({
-            message: "Register berhasil"
-        })
-    } catch (error) {
+            error: false,
+            message: "Register Succeed!",
+        });
+        } catch (error) {
         console.log(error);
-    }
-}
+        res.status(500).json({
+            error: true,
+            message: "Internal Server Error",
+        });
+        }
+};
 
 export const Login = async (req, res) => {
     try {
@@ -46,12 +70,13 @@ export const Login = async (req, res) => {
             where: {
                 email: email,
             },
-            attributes: ['id', 'name', 'email', 'password'],
+            attributes: ['id', 'name', 'email', 'password', 'photoUrl', 'birthDate', 'age', 'gender', 'weight', 'height', 'activity', 'goal', 'isDataCompleted'],
         });
 
         // Pemeriksaan apakah pengguna ditemukan
         if (!user) {
             return res.status(400).json({
+                error: true,
                 message: "Email tidak ditemukan",
             });
         }
@@ -61,12 +86,22 @@ export const Login = async (req, res) => {
         // Pemeriksaan apakah password cocok
         if (!match) {
             return res.status(400).json({
+                error: true,
                 message: "Password salah!",
             });
         }
 
         const userId = user.id;
         const name = user.name;
+        const photoUrl = user.photoUrl;
+        const birthDate = user.birthDate;
+        const age = user.age;
+        const gender = user.gender;
+        const weight = user.weight;
+        const height = user.height;
+        const activity = user.activity;
+        const goal = user.goal;
+        const isDataCompleted = user.isDataCompleted;
 
         const accessToken = jwt.sign({ name, email }, process.env.ACCESS_TOKEN_SECRET, {
             expiresIn: '3M',
@@ -88,11 +123,29 @@ export const Login = async (req, res) => {
             maxAge: 24 * 60 * 60 * 1000,
         });
 
-        res.json({ accessToken });
+        res.json({
+            error: false,
+            message: "success",
+            loginResult: {
+                userId,
+                email,
+                name,
+                photoUrl,
+                birthDate,
+                age,
+                gender,
+                weight,
+                height,
+                activity,
+                goal,
+                isDataCompleted,
+                token: accessToken
+            }
+        });
 
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: "Terjadi kesalahan internal" });
+        res.status(500).json({ message: "Internal Server Error" });
     }
 };
 
