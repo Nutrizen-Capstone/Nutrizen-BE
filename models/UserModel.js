@@ -34,7 +34,7 @@ const Users = db.define('users', {
     },
     photoUrl: {
         type: DataTypes.STRING,
-        defaultValue: 'https://source.unsplash.com/100x100?user',
+        defaultValue: 'https://storage.googleapis.com/nutrizen-bucket/profile%20pictures/default-profile.jpg',
     },
     birthDate: {
         type: DataTypes.DATE,

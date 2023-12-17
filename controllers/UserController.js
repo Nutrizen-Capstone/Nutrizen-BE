@@ -170,10 +170,10 @@ export const Logout = async(req, res) => {
 
 export const getUsers = async(req, res) => {
     try {
-        const users = await Users.findAll({
-            attributes:['id','name','email']
-        });
-        res.json(users);
+        const users = await Users.findAll();
+        res.json({
+            error: false,
+            users: users});
     } catch (error) {
         console.log(error);
     }
@@ -189,7 +189,10 @@ export const getUser = async (req, res) => {
 
         // Jika pengguna ditemukan, kirimkan data pengguna sebagai respons JSON
         if (user) {
-            res.json(user);
+            res.json({
+                error: false,
+                userData: user
+            });
         } else {
             // Jika pengguna tidak ditemukan, kirim respons dengan status 404
             res.status(404).json({
@@ -207,14 +210,13 @@ export const getUser = async (req, res) => {
     }
 };
 
-export const completeProfile = async (req, res) => {
+export const editProfile = async (req, res) => {
     try {
         const userId = req.params.id;
 
         const user = await Users.findOne({
             where: {
-                id: userId,
-                isDataCompleted: false
+                id: userId
             }
         });
 
@@ -242,58 +244,10 @@ export const completeProfile = async (req, res) => {
 
             res.json({
                 error: false,
-                message: "Profil berhasil dilengkapi"
-            });
-        } else {
-            res.status(403).json({
-                error: true,
-                message: "Profil sudah lengkap atau pengguna tidak ditemukan"
-            });
-        }
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({
-            error: true,
-            message: "Terjadi kesalahan server"
-        });
-    }
-};
-
-export const editProfile = async (req, res) => {
-    try {
-        const userId = req.params.id;
-
-        const user = await Users.findByPk(userId);
-
-        if (user) {
-            // Mengambil data profil yang diterima dari permintaan
-            const { photoUrl, birthDate, age, gender, weight, height, activity, goal } = req.body;
-
-            // Melakukan pembaruan pada data profil pengguna
-            await Users.update(
-                {
-                    photoUrl,
-                    birthDate,
-                    age,
-                    gender,
-                    weight,
-                    height,
-                    activity,
-                    goal
-                },
-                {
-                    where: {
-                        id: userId
-                    }
-                }
-            );
-
-            res.json({
-                error: false,
                 message: "Profil berhasil diperbarui"
             });
         } else {
-            res.status(404).json({
+            res.status(403).json({
                 error: true,
                 message: "Pengguna tidak ditemukan"
             });
