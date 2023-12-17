@@ -27,13 +27,14 @@ export const addScanHistory = async (req, res) => {
     }
 };
 
-export const getScanHistoryByUserId = async (req, res) => {
+export const getScanHistory = async (req, res) => {
     try {
-        const userId = req.params.id;
+        const { userId, date } = req.body;
 
         const scanHistory = await ScanHistory.findAll({
             where: {
                 userId,
+                date
             },
         });
 
