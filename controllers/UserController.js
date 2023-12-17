@@ -43,6 +43,7 @@ export const Register = async (req, res) => {
         });
 
         res.json({
+            error: false,
             message: "Register Succeed!",
         });
         } catch (error) {
@@ -69,12 +70,13 @@ export const Login = async (req, res) => {
             where: {
                 email: email,
             },
-            attributes: ['id', 'name', 'email', 'password'],
+            attributes: ['id', 'name', 'email', 'password', 'photoUrl', 'birthDate', 'age', 'gender', 'weight', 'height', 'activity', 'goal', 'isDataCompleted'],
         });
 
         // Pemeriksaan apakah pengguna ditemukan
         if (!user) {
             return res.status(400).json({
+                error: true,
                 message: "Email tidak ditemukan",
             });
         }
@@ -84,12 +86,22 @@ export const Login = async (req, res) => {
         // Pemeriksaan apakah password cocok
         if (!match) {
             return res.status(400).json({
+                error: true,
                 message: "Password salah!",
             });
         }
 
         const userId = user.id;
         const name = user.name;
+        const photoUrl = user.photoUrl;
+        const birthDate = user.birthDate;
+        const age = user.age;
+        const gender = user.gender;
+        const weight = user.weight;
+        const height = user.height;
+        const activity = user.activity;
+        const goal = user.goal;
+        const isDataCompleted = user.isDataCompleted;
 
         const accessToken = jwt.sign({ name, email }, process.env.ACCESS_TOKEN_SECRET, {
             expiresIn: '3M',
@@ -111,11 +123,29 @@ export const Login = async (req, res) => {
             maxAge: 24 * 60 * 60 * 1000,
         });
 
-        res.json({ accessToken });
+        res.json({
+            error: false,
+            message: "success",
+            loginResult: {
+                userId,
+                email,
+                name,
+                photoUrl,
+                birthDate,
+                age,
+                gender,
+                weight,
+                height,
+                activity,
+                goal,
+                isDataCompleted,
+                token: accessToken
+            }
+        });
 
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: "Terjadi kesalahan internal" });
+        res.status(500).json({ message: "Internal Server Error" });
     }
 };
 
