@@ -192,12 +192,18 @@ export const getUser = async (req, res) => {
             res.json(user);
         } else {
             // Jika pengguna tidak ditemukan, kirim respons dengan status 404
-            res.status(404).json({ message: "Pengguna tidak ditemukan" });
+            res.status(404).json({
+                error: true,
+                message: "Pengguna tidak ditemukan"
+            });
         }
     } catch (error) {
         // Tangani kesalahan dan kirim respons dengan status 500
         console.error(error);
-        res.status(500).json({ message: "Terjadi kesalahan server" });
+        res.status(500).json({
+            error: true,
+            message: "Terjadi kesalahan server"
+        });
     }
 };
 
@@ -234,13 +240,22 @@ export const completeProfile = async (req, res) => {
                 }
             );
 
-            res.json({ message: "Profil berhasil dilengkapi" });
+            res.json({
+                error: false,
+                message: "Profil berhasil dilengkapi"
+            });
         } else {
-            res.status(403).json({ message: "Profil sudah lengkap atau pengguna tidak ditemukan" });
+            res.status(403).json({
+                error: true,
+                message: "Profil sudah lengkap atau pengguna tidak ditemukan"
+            });
         }
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: "Terjadi kesalahan server" });
+        res.status(500).json({
+            error: true,
+            message: "Terjadi kesalahan server"
+        });
     }
 };
 
@@ -273,12 +288,21 @@ export const editProfile = async (req, res) => {
                 }
             );
 
-            res.json({ message: "Profil berhasil diperbarui" });
+            res.json({
+                error: false,
+                message: "Profil berhasil diperbarui"
+            });
         } else {
-            res.status(404).json({ message: "Pengguna tidak ditemukan" });
+            res.status(404).json({
+                error: true,
+                message: "Pengguna tidak ditemukan"
+            });
         }
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: "Terjadi kesalahan server" });
+        res.status(500).json({
+            error: true,
+            message: "Terjadi kesalahan server"
+        });
     }
 };
