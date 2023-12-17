@@ -13,8 +13,8 @@ POST http://localhost:5000/register
 Content-Type: application/json
 
 {
-    "name": "Adit Akbars4",
-    "email": "adit4@gmail.com",
+    "name": "Adit Akbars",
+    "email": "adit@gmail.com",
     "password": "123454321",
     "confPassword": "123454321"
 }

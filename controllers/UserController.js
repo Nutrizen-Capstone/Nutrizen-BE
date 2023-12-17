@@ -6,30 +6,53 @@ export const Welcome = (req, res) => {
     res.send("Welcome to NutriZen API!");
 };
 
-export const Register = async(req, res) => {
+export const Register = async (req, res) => {
     const { name, email, password, confPassword } = req.body;
-    if(password !== confPassword){
+
+    // Memeriksa apakah password sesuai
+    if (password !== confPassword) {
         return res.status(400).json({
-            message: "Password tidak sesuai"
-        })
+            error: true,
+            message: "Password tidak sesuai",
+        });
     }
 
-    const salt = await bcrypt.genSalt();
-    const hashPassword = await bcrypt.hash(password, salt);
-    
     try {
+      // Memeriksa apakah email sudah dipakai sebelumnya
+        const existingUser = await Users.findOne({
+            where: {
+                email: email,
+            },
+        });
+    
+        if (existingUser) {
+            return res.status(400).json({
+                error: true,
+                message: "Email has already been taken",
+            });
+        }
+
+      // Jika email belum dipakai, lanjutkan dengan proses registrasi
+        const salt = await bcrypt.genSalt();
+        const hashPassword = await bcrypt.hash(password, salt);
+    
         await Users.create({
             name: name,
             email: email,
-            password: hashPassword
+            password: hashPassword,
         });
+
         res.json({
-            message: "Register berhasil"
-        })
-    } catch (error) {
+            message: "Register Succeed!",
+        });
+        } catch (error) {
         console.log(error);
-    }
-}
+        res.status(500).json({
+            error: true,
+            message: "Internal Server Error",
+        });
+        }
+};
 
 export const Login = async (req, res) => {
     try {
