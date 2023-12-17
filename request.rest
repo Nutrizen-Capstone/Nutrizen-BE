@@ -2,7 +2,7 @@ GET http://localhost:5000
 
 ###
 GET http://localhost:5000/users/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQWRpdCBBa2JhcnMyIiwiZW1haWwiOiJhZGl0MkBnbWFpbC5jb20iLCJpYXQiOjE3MDI4MDA3NDQsImV4cCI6MTcwMjgwMDkyNH0.ryMBfhYIs-epGJ5s-DKILR1CtCZFJuO-KhsTZZBFMQ4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQWRpdCBBa2JhcnMyIiwiZW1haWwiOiJhZGl0MkBnbWFpbC5jb20iLCJpYXQiOjE3MDI4MzEyNzAsImV4cCI6MTcwMjgzMTQ1MH0.KXeb4_44Tuzniyfef5AZ6IdTiEs2N7eKmxltuOJ1_UM
 
 ###
 GET http://localhost:5000/users/c881f805-3199-44c0-b8d2-40ff6e73edde
