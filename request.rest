@@ -76,6 +76,11 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQWRpdCBBa
 }
 
 ###
-GET http://localhost:5000/scan/b0bfbf4c-a601-4580-b1a9-39d5585f7cba
+POST  http://localhost:5000/scanHistory
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQWRpdCBBa2JhcnMyIiwiZW1haWwiOiJhZGl0MkBnbWFpbC5jb20iLCJpYXQiOjE3MDI4MjQyMjAsImV4cCI6MTcwMjgyNDQwMH0.Nn5ekpqHBYjoqPoKqGfrBW-4nmNl0M5NIftaShiKI9I
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQWRpdCBBa2JhcnMyIiwiZW1haWwiOiJhZGl0MkBnbWFpbC5jb20iLCJpYXQiOjE3MDI4MzU3NzcsImV4cCI6MTcwMjgzNTk1N30.2zWs3vw4F7JuIsYXSRMDW8spF_VxGo0cMRd1DXBzOyk
+
+{
+    "userId": "b0bfbf4c-a601-4580-b1a9-39d5585f7cba",
+    "date": "2023-12-17"
+}

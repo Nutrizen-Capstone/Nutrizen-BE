@@ -5,7 +5,7 @@ WORKDIR /usr/src/app
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 COPY package*.json ./
 # Install app dependencies
-RUN npm install mysql2 bcrypt cookie-parser cors dotenv express jsonwebtoken sequelize uuid body-parser
+RUN npm install mysql2 bcrypt cookie-parser cors dotenv express jsonwebtoken sequelize uuid body-parser moment
 # Bundle app source
 COPY . .
 # Binding port
