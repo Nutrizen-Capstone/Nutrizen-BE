@@ -39,9 +39,6 @@ const ScanHistory = db.define('scan_histories', {
         allowNull: false,
         defaultValue: DataTypes.NOW,
     },
-}, {
-    timestamps: false,
-    underscored: false,
 });
 
 export default ScanHistory;

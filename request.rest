@@ -64,16 +64,18 @@ Content-Type: application/json
 ###
 POST http://localhost:5000/scan
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQWRpdCBBa2JhcnMyIiwiZW1haWwiOiJhZGl0MkBnbWFpbC5jb20iLCJpYXQiOjE3MDI4MjQyMjAsImV4cCI6MTcwMjgyNDQwMH0.Nn5ekpqHBYjoqPoKqGfrBW-4nmNl0M5NIftaShiKI9I
 
 {
     "userId": "b0bfbf4c-a601-4580-b1a9-39d5585f7cba",
-    "nameFood": "Chicken Teriyaki",
-    "eatTime": "21:00:00",
-    "calorie": 600,
-    "portion": 2,
-    "total": 1200
+    "nameFood": "Oatmeal",
+    "eatTime": "07:30:00",
+    "calorie": 300,
+    "portion": 1,
+    "total": 300
 }
 
 ###
 GET http://localhost:5000/scan/b0bfbf4c-a601-4580-b1a9-39d5585f7cba
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQWRpdCBBa2JhcnMyIiwiZW1haWwiOiJhZGl0MkBnbWFpbC5jb20iLCJpYXQiOjE3MDI4MjQyMjAsImV4cCI6MTcwMjgyNDQwMH0.Nn5ekpqHBYjoqPoKqGfrBW-4nmNl0M5NIftaShiKI9I

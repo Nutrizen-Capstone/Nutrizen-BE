@@ -6,6 +6,7 @@ import { addScanHistory, getScanHistoryByUserId } from "../controllers/ScanContr
 
 const router = express.Router();
 
+//user
 router.get('/', Welcome);
 router.post('/register', Register);
 router.post('/login', Login);
@@ -16,10 +17,8 @@ router.get('/users/:id', verifyToken, getUser);
 router.put('/profile/:id', verifyToken, completeProfile);
 router.put('/profile/:id/edit', verifyToken, editProfile);
 
-// Rute untuk menambahkan catatan scan history
-router.post('/scan', addScanHistory);
-
-// Rute untuk mendapatkan catatan scan history berdasarkan userId
-router.get('/scan/:userId', getScanHistoryByUserId);
+//scan
+router.post('/scan', verifyToken, addScanHistory);
+router.get('/scan/:userId', verifyToken, getScanHistoryByUserId);
 
 export default router
