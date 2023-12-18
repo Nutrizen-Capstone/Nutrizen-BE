@@ -104,11 +104,11 @@ export const Login = async (req, res) => {
         const isDataCompleted = user.isDataCompleted;
 
         const accessToken = jwt.sign({ name, email }, process.env.ACCESS_TOKEN_SECRET, {
-            expiresIn: '3M',
+            expiresIn: '180d',
         });
 
         const refreshToken = jwt.sign({ name, email }, process.env.REFRESH_TOKEN_SECRET, {
-            expiresIn: '3M',
+            expiresIn: '180d',
         });
 
         // Update refreshToken pada database
