@@ -78,7 +78,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQWRpdCBBa
 ###
 POST  http://localhost:5000/scanHistory
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQWRpdCBBa2JhcnMyIiwiZW1haWwiOiJhZGl0MkBnbWFpbC5jb20iLCJpYXQiOjE3MDI4MzU3NzcsImV4cCI6MTcwMjgzNTk1N30.2zWs3vw4F7JuIsYXSRMDW8spF_VxGo0cMRd1DXBzOyk
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQWRpdCBBa2JhcnMyIiwiZW1haWwiOiJhZGl0MkBnbWFpbC5jb20iLCJpYXQiOjE3MDI4OTUxODAsImV4cCI6MTcxODQ0NzE4MH0.xk01OYMBflLpv-NzOCiqUbCpQIUeYxXDE90yuPTALaQ
 
 {
     "userId": "b0bfbf4c-a601-4580-b1a9-39d5585f7cba",
