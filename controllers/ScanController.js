@@ -38,6 +38,14 @@ export const getScanHistory = async (req, res) => {
             },
         });
 
+        if (scanHistory.length === 0) {
+            return res.json({
+                error: true,
+                message: "Data not found",
+                history: scanHistory
+            });
+        }
+
         res.json({
             error: false,
             message: "success",
