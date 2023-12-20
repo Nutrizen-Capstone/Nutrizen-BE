@@ -59,3 +59,33 @@ export const getScanHistory = async (req, res) => {
         });
     }
 };
+
+export const deleteScanHistory = async (req, res) => {
+    try {
+        const { historyId } = req.body;
+
+        const deletedRows = await ScanHistory.destroy({
+            where: {
+                historyId,
+            },
+        });
+
+        if (deletedRows === 0) {
+            return res.json({
+                error: true,
+                message: "Data not found",
+            });
+        }
+
+        res.json({
+            error: false,
+            message: "Data has been deleted successfully",
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
+            error: true,
+            message: "Terjadi kesalahan server"
+        });
+    }
+};

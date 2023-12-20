@@ -2,7 +2,7 @@ import express from "express";
 import  { getUsers, Login, Logout, Register, getUser, editProfile, Welcome } from "../controllers/UserController.js";
 import { verifyToken } from "../middleware/VerifyToken.js";
 import { refreshToken } from "../controllers/RefreshToken.js";
-import { addScanHistory, getScanHistory } from "../controllers/ScanController.js";
+import { addScanHistory, deleteScanHistory, getScanHistory } from "../controllers/ScanController.js";
 
 const router = express.Router();
 
@@ -19,5 +19,6 @@ router.put('/profile/:id', verifyToken, editProfile);
 //scan
 router.post('/scan', verifyToken, addScanHistory);
 router.post('/scanHistory', verifyToken, getScanHistory);
+router.post('/scanHistory/delete', verifyToken, deleteScanHistory);
 
 export default router

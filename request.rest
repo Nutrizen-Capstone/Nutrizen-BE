@@ -81,6 +81,15 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQWRpdCBBa2JhcnMyIiwiZW1haWwiOiJhZGl0MkBnbWFpbC5jb20iLCJpYXQiOjE3MDMwODExMTcsImV4cCI6MTcxODYzMzExN30.-cj_PxhdTqXmVdCajNfFa8ki-BTcW6m1hziEgEaiGH0
 
 {
-    "userId": "b0bfbf4c-a601-4580-b1a9-39d5585f7cba",
-    "date": "2023-12-19"
+    "userId": "1",
+    "date": "2023-12-20"
+}
+
+###
+POST  http://localhost:5000/scanHistory/delete
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQWRpdCBBa2JhcnMyIiwiZW1haWwiOiJhZGl0MkBnbWFpbC5jb20iLCJpYXQiOjE3MDMwODExMTcsImV4cCI6MTcxODYzMzExN30.-cj_PxhdTqXmVdCajNfFa8ki-BTcW6m1hziEgEaiGH0
+
+{
+    "historyId": "b599042b-2533-42fa-b615-d64ce8ca8cdb"
 }
