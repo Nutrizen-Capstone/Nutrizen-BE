@@ -48,6 +48,14 @@ const ScanHistory = db.define('scan_histories', {
             this.setDataValue('date', formattedDate);
         },
     },
+    timestamp: {
+        type: DataTypes.DATE,
+        allowNull: true,
+        defaultValue: () => moment().format('YYYY-MM-DD HH:mm:ss'),
+        get() {
+            return moment.utc(this.getDataValue('timestamp')).format('YYYY-MM-DD HH:mm:ss');
+        },
+    },
 });
 
 export default ScanHistory;
