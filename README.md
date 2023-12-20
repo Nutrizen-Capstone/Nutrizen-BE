@@ -46,7 +46,7 @@ Ensure you have the following software installed before running the Nutrizen bac
    ```
 The application will run on http://localhost:3000 by default. You can change the port through the configuration.
 
-API Endpoints
+## API Endpoints
 Here are some available API endpoints:
 
 User Routes
@@ -63,10 +63,10 @@ Scan Routes
 POST /api/scan: Add scan history.
 POST /api/scanHistory: Get scan history.
 
+## API URL
 
-## Contributions
+http://auth-service-test-jsg4j2mima-uc.a.run.app/
 
-We welcome contributions from the community! If you find a bug or want to contribute to this project, please open an issue or submit a pull request.
 
 
 ---
