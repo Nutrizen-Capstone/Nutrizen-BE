@@ -46,7 +46,7 @@ Ensure you have the following software installed before running the Nutrizen bac
    ```
 The application will run on http://localhost:3000 by default. You can change the port through the configuration.
 
-## API Endpoints
+API Endpoints
 Here are some available API endpoints:
 
 User Routes
