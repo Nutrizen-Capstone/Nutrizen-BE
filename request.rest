@@ -64,13 +64,13 @@ Content-Type: application/json
 ###
 POST http://localhost:5000/scan
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQWRpdCBBa2JhcnMyIiwiZW1haWwiOiJhZGl0MkBnbWFpbC5jb20iLCJpYXQiOjE3MDI4MjQyMjAsImV4cCI6MTcwMjgyNDQwMH0.Nn5ekpqHBYjoqPoKqGfrBW-4nmNl0M5NIftaShiKI9I
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQWRpdCBBa2JhcnMyIiwiZW1haWwiOiJhZGl0MkBnbWFpbC5jb20iLCJpYXQiOjE3MDMwODExMTcsImV4cCI6MTcxODYzMzExN30.-cj_PxhdTqXmVdCajNfFa8ki-BTcW6m1hziEgEaiGH0
 
 {
-    "userId": "b0bfbf4c-a601-4580-b1a9-39d5585f7cba",
-    "nameFood": "Oatmeal",
-    "eatTime": "07:30:00",
-    "calorie": 300,
+    "userId": "1",
+    "nameFood": "fixing format timezone",
+    "eatTime": "Dinner",
+    "calorie": 303,
     "portion": 1,
     "total": 300
 }
@@ -78,9 +78,9 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQWRpdCBBa
 ###
 POST  http://localhost:5000/scanHistory
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQWRpdCBBa2JhcnMyIiwiZW1haWwiOiJhZGl0MkBnbWFpbC5jb20iLCJpYXQiOjE3MDI4OTUxODAsImV4cCI6MTcxODQ0NzE4MH0.xk01OYMBflLpv-NzOCiqUbCpQIUeYxXDE90yuPTALaQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQWRpdCBBa2JhcnMyIiwiZW1haWwiOiJhZGl0MkBnbWFpbC5jb20iLCJpYXQiOjE3MDMwODExMTcsImV4cCI6MTcxODYzMzExN30.-cj_PxhdTqXmVdCajNfFa8ki-BTcW6m1hziEgEaiGH0
 
 {
     "userId": "b0bfbf4c-a601-4580-b1a9-39d5585f7cba",
-    "date": "2023-12-17"
+    "date": "2023-12-19"
 }
