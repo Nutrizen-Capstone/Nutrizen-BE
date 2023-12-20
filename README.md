@@ -46,22 +46,25 @@ Ensure you have the following software installed before running the Nutrizen bac
    ```
 The application will run on http://localhost:3000 by default. You can change the port through the configuration.
 
-API Endpoints
+## API Endpoints
+
 Here are some available API endpoints:
 
-User Routes
-GET /api/welcome: Welcome message.
-POST /api/register: Register a new user.
-POST /api/login: User login.
-GET /api/token: Refresh token.
-DELETE /api/logout: User logout.
-GET /api/users: Get a list of users.
-GET /api/users/:id: Get user details.
-PUT /api/profile/:id: Edit user profile.
+### User Routes
 
-Scan Routes
-POST /api/scan: Add scan history.
-POST /api/scanHistory: Get scan history.
+- **GET /api/welcome**: Welcome message.
+- **POST /api/register**: Register a new user.
+- **POST /api/login**: User login.
+- **GET /api/token**: Refresh token.
+- **DELETE /api/logout**: User logout.
+- **GET /api/users**: Get a list of users.
+- **GET /api/users/:id**: Get user details.
+- **PUT /api/profile/:id**: Edit user profile.
+
+### Scan Routes
+
+- **POST /api/scan**: Add scan history.
+- **POST /api/scanHistory**: Get scan history.
 
 ## API URL
 
