@@ -26,23 +26,25 @@ Ensure you have the following software installed before running the Nutrizen bac
 
    ```bash
    git clone https://github.com/Nutrizen-Capstone/Nutrizen-BE.git
-Navigate to the project directory:
+   
+2. Navigate to the project directory:
 
-bash
-Copy code
+```bash
 cd Nutrizen-BE
-Install dependencies:
+```
+3. Install dependencies:
 
-bash
-Copy code
+```bash
 npm install
-Configure the application. You can find the configuration file at config/config.js. Adjust the configuration as needed, including integration with calorie scanning services or nutrition data providers.
 
-Run the application:
+```
+4. Configure the application. You can find the configuration file at config/config.js. Adjust the configuration as needed, including integration with calorie scanning services or nutrition data providers.
 
-bash
-Copy code
+5. Run the application:
+
+```bash
 npm start
+```
 The application will run on http://localhost:3000 by default. You can change the port through the configuration.
 
 API Endpoints
@@ -71,3 +73,5 @@ We welcome contributions from the community! If you find a bug or want to contri
 ---
 
 **Nutrizen Backend** was created by CH2-PS076 as the capstone project for the Bangkit Academy program. Thank you for using Nutrizen!
+
+
