@@ -260,3 +260,39 @@ export const editProfile = async (req, res) => {
         });
     }
 };
+
+export const deleteAccount = async (req, res) => {
+    try {
+        const { userId } = req.body;
+
+        // Mencari pengguna berdasarkan ID
+        const user = await Users.findByPk(userId);
+
+        // Jika pengguna ditemukan, hapus akunnya
+        if (user) {
+            await Users.destroy({
+                where: {
+                    id: userId,
+                },
+            });
+
+            res.json({
+                error: false,
+                message: "Akun berhasil dihapus",
+            });
+        } else {
+            // Jika pengguna tidak ditemukan, kirim respons dengan status 404
+            res.status(404).json({
+                error: true,
+                message: "Pengguna tidak ditemukan",
+            });
+        }
+    } catch (error) {
+        // Tangani kesalahan dan kirim respons dengan status 500
+        console.error(error);
+        res.status(500).json({
+            error: true,
+            message: "Terjadi kesalahan server",
+        });
+    }
+};

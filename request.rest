@@ -60,6 +60,14 @@ Content-Type: application/json
     "birthDate": "2000-01-01"     
 }
 
+###
+POST http://localhost:5000/users/delete
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQWRpdCBBa2JhcnMyIiwiZW1haWwiOiJhZGl0MkBnbWFpbC5jb20iLCJpYXQiOjE3MDMwODMyMzAsImV4cCI6MTcxODYzNTIzMH0.-q4kYMP2wbYNB7a5Xi4U2hldAjqx7nBj5k-CBsMu5kE
+Content-Type: application/json
+
+{
+    "userId": "2"
+}
 
 ###
 POST http://localhost:5000/scan
