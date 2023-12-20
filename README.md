@@ -29,22 +29,21 @@ Ensure you have the following software installed before running the Nutrizen bac
    
 2. Navigate to the project directory:
 
-```bash
-cd Nutrizen-BE
-```
+   ```bash
+   cd Nutrizen-BE
+   ```
 3. Install dependencies:
 
-```bash
-npm install
-
-```
+   ```bash
+   npm install
+   ```
 4. Configure the application. You can find the configuration file at config/config.js. Adjust the configuration as needed, including integration with calorie scanning services or nutrition data providers.
 
 5. Run the application:
 
-```bash
-npm start
-```
+   ```bash
+   npm start
+   ```
 The application will run on http://localhost:3000 by default. You can change the port through the configuration.
 
 API Endpoints
