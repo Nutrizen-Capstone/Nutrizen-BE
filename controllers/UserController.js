@@ -6,30 +6,54 @@ export const Welcome = (req, res) => {
     res.send("Welcome to NutriZen API!");
 };
 
-export const Register = async(req, res) => {
+export const Register = async (req, res) => {
     const { name, email, password, confPassword } = req.body;
-    if(password !== confPassword){
+
+    // Memeriksa apakah password sesuai
+    if (password !== confPassword) {
         return res.status(400).json({
-            message: "Password tidak sesuai"
-        })
+            error: true,
+            message: "Password tidak sesuai",
+        });
     }
 
-    const salt = await bcrypt.genSalt();
-    const hashPassword = await bcrypt.hash(password, salt);
-    
     try {
+      // Memeriksa apakah email sudah dipakai sebelumnya
+        const existingUser = await Users.findOne({
+            where: {
+                email: email,
+            },
+        });
+    
+        if (existingUser) {
+            return res.status(400).json({
+                error: true,
+                message: "Email has already been taken",
+            });
+        }
+
+      // Jika email belum dipakai, lanjutkan dengan proses registrasi
+        const salt = await bcrypt.genSalt();
+        const hashPassword = await bcrypt.hash(password, salt);
+    
         await Users.create({
             name: name,
             email: email,
-            password: hashPassword
+            password: hashPassword,
         });
+
         res.json({
-            message: "Register berhasil"
-        })
-    } catch (error) {
+            error: false,
+            message: "Register Succeed!",
+        });
+        } catch (error) {
         console.log(error);
-    }
-}
+        res.status(500).json({
+            error: true,
+            message: "Internal Server Error",
+        });
+        }
+};
 
 export const Login = async (req, res) => {
     try {
@@ -46,12 +70,13 @@ export const Login = async (req, res) => {
             where: {
                 email: email,
             },
-            attributes: ['id', 'name', 'email', 'password'],
+            attributes: ['id', 'name', 'email', 'password', 'photoUrl', 'birthDate', 'age', 'gender', 'weight', 'height', 'activity', 'goal', 'isDataCompleted'],
         });
 
         // Pemeriksaan apakah pengguna ditemukan
         if (!user) {
             return res.status(400).json({
+                error: true,
                 message: "Email tidak ditemukan",
             });
         }
@@ -61,19 +86,29 @@ export const Login = async (req, res) => {
         // Pemeriksaan apakah password cocok
         if (!match) {
             return res.status(400).json({
+                error: true,
                 message: "Password salah!",
             });
         }
 
         const userId = user.id;
         const name = user.name;
+        const photoUrl = user.photoUrl;
+        const birthDate = user.birthDate;
+        const age = user.age;
+        const gender = user.gender;
+        const weight = user.weight;
+        const height = user.height;
+        const activity = user.activity;
+        const goal = user.goal;
+        const isDataCompleted = user.isDataCompleted;
 
         const accessToken = jwt.sign({ name, email }, process.env.ACCESS_TOKEN_SECRET, {
-            expiresIn: '3M',
+            expiresIn: '180d',
         });
 
         const refreshToken = jwt.sign({ name, email }, process.env.REFRESH_TOKEN_SECRET, {
-            expiresIn: '3M',
+            expiresIn: '180d',
         });
 
         // Update refreshToken pada database
@@ -88,11 +123,29 @@ export const Login = async (req, res) => {
             maxAge: 24 * 60 * 60 * 1000,
         });
 
-        res.json({ accessToken });
+        res.json({
+            error: false,
+            message: "success",
+            loginResult: {
+                userId,
+                email,
+                name,
+                photoUrl,
+                birthDate,
+                age,
+                gender,
+                weight,
+                height,
+                activity,
+                goal,
+                isDataCompleted,
+                token: accessToken
+            }
+        });
 
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: "Terjadi kesalahan internal" });
+        res.status(500).json({ message: "Internal Server Error" });
     }
 };
 
@@ -117,10 +170,10 @@ export const Logout = async(req, res) => {
 
 export const getUsers = async(req, res) => {
     try {
-        const users = await Users.findAll({
-            attributes:['id','name','email']
-        });
-        res.json(users);
+        const users = await Users.findAll();
+        res.json({
+            error: false,
+            users: users});
     } catch (error) {
         console.log(error);
     }
@@ -136,26 +189,34 @@ export const getUser = async (req, res) => {
 
         // Jika pengguna ditemukan, kirimkan data pengguna sebagai respons JSON
         if (user) {
-            res.json(user);
+            res.json({
+                error: false,
+                userData: user
+            });
         } else {
             // Jika pengguna tidak ditemukan, kirim respons dengan status 404
-            res.status(404).json({ message: "Pengguna tidak ditemukan" });
+            res.status(404).json({
+                error: true,
+                message: "Pengguna tidak ditemukan"
+            });
         }
     } catch (error) {
         // Tangani kesalahan dan kirim respons dengan status 500
         console.error(error);
-        res.status(500).json({ message: "Terjadi kesalahan server" });
+        res.status(500).json({
+            error: true,
+            message: "Terjadi kesalahan server"
+        });
     }
 };
 
-export const completeProfile = async (req, res) => {
+export const editProfile = async (req, res) => {
     try {
         const userId = req.params.id;
 
         const user = await Users.findOne({
             where: {
-                id: userId,
-                isDataCompleted: false
+                id: userId
             }
         });
 
@@ -181,51 +242,57 @@ export const completeProfile = async (req, res) => {
                 }
             );
 
-            res.json({ message: "Profil berhasil dilengkapi" });
+            res.json({
+                error: false,
+                message: "Profil berhasil diperbarui"
+            });
         } else {
-            res.status(403).json({ message: "Profil sudah lengkap atau pengguna tidak ditemukan" });
+            res.status(403).json({
+                error: true,
+                message: "Pengguna tidak ditemukan"
+            });
         }
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: "Terjadi kesalahan server" });
+        res.status(500).json({
+            error: true,
+            message: "Terjadi kesalahan server"
+        });
     }
 };
 
-export const editProfile = async (req, res) => {
+export const deleteAccount = async (req, res) => {
     try {
-        const userId = req.params.id;
+        const { userId } = req.body;
 
+        // Mencari pengguna berdasarkan ID
         const user = await Users.findByPk(userId);
 
+        // Jika pengguna ditemukan, hapus akunnya
         if (user) {
-            // Mengambil data profil yang diterima dari permintaan
-            const { photoUrl, birthDate, age, gender, weight, height, activity, goal } = req.body;
-
-            // Melakukan pembaruan pada data profil pengguna
-            await Users.update(
-                {
-                    photoUrl,
-                    birthDate,
-                    age,
-                    gender,
-                    weight,
-                    height,
-                    activity,
-                    goal
+            await Users.destroy({
+                where: {
+                    id: userId,
                 },
-                {
-                    where: {
-                        id: userId
-                    }
-                }
-            );
+            });
 
-            res.json({ message: "Profil berhasil diperbarui" });
+            res.json({
+                error: false,
+                message: "Akun berhasil dihapus",
+            });
         } else {
-            res.status(404).json({ message: "Pengguna tidak ditemukan" });
+            // Jika pengguna tidak ditemukan, kirim respons dengan status 404
+            res.status(404).json({
+                error: true,
+                message: "Pengguna tidak ditemukan",
+            });
         }
     } catch (error) {
+        // Tangani kesalahan dan kirim respons dengan status 500
         console.error(error);
-        res.status(500).json({ message: "Terjadi kesalahan server" });
+        res.status(500).json({
+            error: true,
+            message: "Terjadi kesalahan server",
+        });
     }
 };
