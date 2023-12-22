@@ -60,11 +60,13 @@ Here are some available API endpoints:
 - **GET /api/users**: Get a list of users.
 - **GET /api/users/:id**: Get user details.
 - **PUT /api/profile/:id**: Edit user profile.
+- **POST /api/users/delete**: Delete user account.
 
 ### Scan Routes
 
 - **POST /api/scan**: Add scan history.
 - **POST /api/scanHistory**: Get scan history.
+- **POST /api/scanHistory/delete**: Delete scan history.
 
 ## API URL
 
