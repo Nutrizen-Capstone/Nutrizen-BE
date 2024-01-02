@@ -66,10 +66,6 @@ Here are some available API endpoints:
 - **POST /api/scan**: Add scan history.
 - **POST /api/scanHistory**: Get scan history.
 
-## API URL
-
-http://auth-service-test-jsg4j2mima-uc.a.run.app/
-
 
 
 ---
